@@ -14,7 +14,7 @@ pipeline {
         steps{
             echo'building'
             sh 'mvn clean'
-            sh 'mvn install'
+            sh 'mvn install 3.8.6'
         }
     }
     
@@ -22,7 +22,7 @@ pipeline {
         steps{
             echo 'for testing'
             sh 'mvn test'
-            sh 'mvn install'
+            sh 'mvn install 3.8.6'
         }
     }
     
