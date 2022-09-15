@@ -1,36 +1,38 @@
 pipeline {
     agent any
-    tools{
-        maven 'mvn'
-        jdk 'jdk'
-    }
     stages {
-        stage('code'){
+        stage('compile stage'){
             steps{
-                echo'coding'
+			withmaven(maven : 'maven_3_5_0'){
+			sh 'mvn clean compile'       
         }
     }
-    stage('build'){
+    stage('testing stage'){
         steps{
-            echo'building'
-            sh 'mvn clean'
-            sh 'mvn install'
+		withmaven(maven : 'maven_3_5_0'){
+			sh 'mvn test'
+            
+            
         }
     }
     
-    stage('test'){
+    stage('deployment stage'){
         steps{
             echo 'for testing'
-            sh 'mvn test'
-            sh 'mvn install'
+            
         }
     }
     
     stage('deploy'){
         steps{
-            echo'deploying'
+		withmaven(maven : 'maven_3_5_0'){
+			sh 'mvn deploy'
+           
         }
     }
     
-}
+     }
+   }
+  }
+ }
 }
